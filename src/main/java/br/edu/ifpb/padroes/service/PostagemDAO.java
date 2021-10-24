@@ -1,31 +1,32 @@
+package br.edu.ifpb.padroes.service;
+
 import br.edu.ifpb.padroes.modelo.Postagem;
 import br.edu.ifpb.padroes.modelo.PostagemResposta;
-import br.edu.ifpb.padroes.service.UsuarioServiceImpl;
 
 import java.sql.*;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class PostagemDAO extends DAO<Postagem>{
+public class PostagemDAO {
 
     private String arquivoBanco;
     public PostagemDAO(String arquivoBanco) {
         this.arquivoBanco = arquivoBanco;
     }
-//
-//    private Connection connect() {
-//        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:"+this.arquivoBanco)) {
-//            Statement statement = connection.createStatement();
-//
-//            //Criando tabela de usu√°rios
-//            statement.execute("CREATE TABLE IF NOT EXISTS POSTAGEM( ID INTEGER, TITULO VARCHAR, USUARIO_ID VARCHAR, MENSAGEM VARCHAR, TIPO VARCHAR )");
-//
-//            return connection;
-//        } catch (SQLException e) {
-//            System.out.println(e.getMessage());
-//        }
-//        return null;
-//    }
+
+    private Connection connect() {
+        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:"+this.arquivoBanco)) {
+            Statement statement = connection.createStatement();
+
+            //Criando tabela de usu·rios
+            statement.execute("CREATE TABLE IF NOT EXISTS POSTAGEM( ID INTEGER, TITULO VARCHAR, USUARIO_ID VARCHAR, MENSAGEM VARCHAR, TIPO VARCHAR )");
+
+            return connection;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
 
     public void addPostagemPublica(Postagem postagem) {
         Connection conexao = connect();
@@ -54,28 +55,28 @@ public class PostagemDAO extends DAO<Postagem>{
             this.trataExcecao(ex);
         }
     }
-
-    public void addPostagemResposta(PostagemResposta postagem) {
-        this.trataExcecao(new Exception("N√£o implementado ainda"));
-    }
-
-    public void updatePostagem(Postagem postagem) {
-        this.trataExcecao(new Exception("N√£o implementado ainda"));
-    }
-
-    public void deletePostagem(Postagem postagem) {
-        this.trataExcecao(new Exception("N√£o implementado ainda"));
-    }
-
-    public List<Postagem> listPostagens() {
-        this.trataExcecao(new Exception("N√£o implementado ainda"));
-        return null;
-    }
-
-    public Postagem getPostagem(Long id) {
-        this.trataExcecao(new Exception("N√£o implementado ainda"));
-        return null;
-    }
+//
+//    public void addPostagemResposta(PostagemResposta postagem) {
+//        this.trataExcecao(new Exception("N„o implementado ainda"));
+//    }
+//
+//    public void updatePostagem(Postagem postagem) {
+//        this.trataExcecao(new Exception("N„o implementado ainda"));
+//    }
+//
+//    public void deletePostagem(Postagem postagem) {
+//        this.trataExcecao(new Exception("N„o implementado ainda"));
+//    }
+//
+//    public List<Postagem> listPostagens() {
+//        this.trataExcecao(new Exception("N„o implementado ainda"));
+//        return null;
+//    }
+//
+//    public Postagem getPostagem(Long id) {
+//        this.trataExcecao(new Exception("N„o implementado ainda"));
+//        return null;
+//    }
 
     public void trataExcecao(Exception ex) {
         Logger.getLogger(UsuarioServiceImpl.class.getName()).warning(ex.getMessage());
