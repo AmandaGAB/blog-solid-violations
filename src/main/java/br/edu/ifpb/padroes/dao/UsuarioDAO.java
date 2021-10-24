@@ -1,6 +1,5 @@
-package br.edu.ifpb.padroes.service;
-
 import br.edu.ifpb.padroes.modelo.Usuario;
+import br.edu.ifpb.padroes.service.UsuarioServiceImpl;
 
 import java.sql.*;
 import java.util.List;
@@ -12,35 +11,35 @@ public class UsuarioDAO {
     public UsuarioDAO(String arquivoBanco) {
         this.arquivoBanco = arquivoBanco;
     }
-
-    private Connection connect() {
-        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:"+this.arquivoBanco)) {
-            Statement statement = connection.createStatement();
-
-            //Criando tabela de usuários
-            statement.execute("CREATE TABLE IF NOT EXISTS USUARIO( ID INTEGER, NOME VARCHAR, LOGIN VARCHAR, SENHA VARCHAR )");
-            statement.execute("INSERT INTO USUARIO( ID, NOME, LOGIN, SENHA) VALUES (1, 'admin', 'admin', '123')");
-
-            //Criando tabela de produtos
-            statement.execute("CREATE TABLE IF NOT EXISTS USUARIO( ID INTEGER, NOME VARCHAR, LOGIN VARCHAR, SENHA VARCHAR )");
-            statement.execute("INSERT INTO USUARIO( ID, NOME, LOGIN, SENHA) VALUES (1, 'admin', 'admin', '123')");
-
-            PreparedStatement stmt = connection.prepareStatement("select * from USUARIO");
-            ResultSet resultSet = stmt.executeQuery();
-
-            while (resultSet.next()) {
-                Integer id = resultSet.getInt("ID");
-                String nome = resultSet.getString("NOME");
-
-                System.out.println( id + " - " + nome);
-            }
-
-            return connection;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return null;
-    }
+//
+//    private Connection connect() {
+//        try (Connection connection = DriverManager.getConnection("jdbc:sqlite:"+this.arquivoBanco)) {
+//            Statement statement = connection.createStatement();
+//
+//            //Criando tabela de usuários
+//            statement.execute("CREATE TABLE IF NOT EXISTS USUARIO( ID INTEGER, NOME VARCHAR, LOGIN VARCHAR, SENHA VARCHAR )");
+//            statement.execute("INSERT INTO USUARIO( ID, NOME, LOGIN, SENHA) VALUES (1, 'admin', 'admin', '123')");
+//
+//            //Criando tabela de produtos
+//            statement.execute("CREATE TABLE IF NOT EXISTS USUARIO( ID INTEGER, NOME VARCHAR, LOGIN VARCHAR, SENHA VARCHAR )");
+//            statement.execute("INSERT INTO USUARIO( ID, NOME, LOGIN, SENHA) VALUES (1, 'admin', 'admin', '123')");
+//
+//            PreparedStatement stmt = connection.prepareStatement("select * from USUARIO");
+//            ResultSet resultSet = stmt.executeQuery();
+//
+//            while (resultSet.next()) {
+//                Integer id = resultSet.getInt("ID");
+//                String nome = resultSet.getString("NOME");
+//
+//                System.out.println( id + " - " + nome);
+//            }
+//
+//            return connection;
+//        } catch (SQLException e) {
+//            System.out.println(e.getMessage());
+//        }
+//        return null;
+//    }
 
     public void addUsuario(Usuario usuario) {
         Connection conexao = connect();
