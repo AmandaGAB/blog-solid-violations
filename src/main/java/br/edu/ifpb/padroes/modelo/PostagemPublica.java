@@ -8,7 +8,7 @@ public class PostagemPublica extends Postagem {
         return postagemPublica;
     }
 
-    public void setPostagemTipo(PostagemPublica postagemPublica) {
+    public void setPostagemPublica(PostagemPublica postagemPublica) {
         this.postagemPublica = postagemPublica;
     }
 }
